@@ -139,7 +139,7 @@ const searchItem = async (skip, limit, input, repository) => {
       for (const key in input) {
         if (
           key != null &&
-          key != 'active' &&
+          key != 'rented' &&
           key != 'limit' &&
           key != 'skip' &&
           key != 'page'
@@ -157,11 +157,20 @@ const searchItem = async (skip, limit, input, repository) => {
             if (!book) {
               return resolve({
                 status: 404,
-                message: 'This book no exists',
+                message: 'No books were found with the parameters informed',
               });
             }
 
-            return resolve(book);
+
+            const view = book.map((element) => {
+              element.details = undefined;
+              element.rent = undefined;
+              element.active = undefined;
+
+              return element;
+            });
+
+            return resolve(view);
           })
           .catch((error) => reject(error));
     } catch (error) {
@@ -174,7 +183,6 @@ const searchItem = async (skip, limit, input, repository) => {
 const checkDuplicity = async (book, repository, id) => {
   if (!book || !repository) return false;
   const cd = await repository().findByIdorISBN(book, {});
-  console.log(cd);
   if (cd == false) {
     return false;
   } else if (cd != null) {
@@ -202,6 +210,7 @@ const viewBook = (book, repository) => {
             }
 
             book[0].rent = undefined;
+            book[0].active = undefined;
             return resolve(book);
           })
           .catch((error) => reject(error));
@@ -222,13 +231,14 @@ const viewLibrary = (repository) => {
             if (!library) {
               return resolve({
                 status: 404,
-                message: 'No books were found with the parameters informed',
+                message: 'This book no exists',
               });
             }
 
             const view = library.map((element) => {
               element.details = undefined;
               element.rent = undefined;
+              element.active = undefined;
 
               return element;
             });
@@ -259,7 +269,6 @@ const rentBook = (book, userId, repository) => {
       repository()
           .rentBook(book, rentHelp)
           .then((book) => {
-            console.log(book);
             if (book == false || book == null) {
               return resolve({
                 status: 404,

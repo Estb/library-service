@@ -229,7 +229,6 @@ module.exports = () => {
       });
     },
     bookReturn: (IdorISBN, userId) => {
-      console.log(userId);
       return new Promise((resolve, reject) => {
         logger.info('[BookDAO] Edit a book renting');
         let item = null;

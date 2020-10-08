@@ -212,7 +212,7 @@ module.exports = (
             }
           })
           .catch((err) => {
-            if (err) return next(err);
+            if (err) return rh(res).error({status: 400, message: err});
           });
       },
   );
