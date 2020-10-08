@@ -1,0 +1,38 @@
+{
+  "name": "library-service",
+  "version": "1.0.0",
+  "description": "Provide library service.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index",
+    "start": "node src/index",
+    "test": "yarn jest",
+    "lint": "./node_modules/.bin/eslint ."
+  },
+  "author": "Estevao Bezerra",
+  "license":"ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.16.3",
+    "helmet": "^3.12.1",
+    "jest": "^26.4.2",
+    "logger": "^0.0.1",
+    "mongodb": "^3.1.0-beta4",
+    "mongoose": "^5.10.6",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.1",
+    "passport-http-bearer": "^1.0.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "supertest": "^3.1.0",
+    "winston": "^3.3.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "eslint": "^7.10.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
