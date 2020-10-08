@@ -22,11 +22,9 @@ module.exports = () => {
                 // eslint-disable-next-line max-len
                     '[BookDAO]No books were found with the parameters informed',
                 );
-                return resolve({
-                  status: 404,
-                  // eslint-disable-next-line max-len
-                  message: 'No books were found with the parameters informed',
-                });
+                return resolve(
+                    resolve(false),
+                );
               }
             })
             .catch((err) => {

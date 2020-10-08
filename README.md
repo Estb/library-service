@@ -75,10 +75,15 @@ https://documenter.getpostman.com/view/8310828/TVRj4nu4
 
 O ambiente de teste esta disponivel na platafoma Heroku no link abaixo.
 
-https://library-service.herokuapp.com/
+https://estb-library-service.herokuapp.com/
 
 
 ## DOCKER
+Para executar essa aplicação com docker utilize o docker compose.
+```
+cd lirary-service
+docker compose up
+```
 
 
 

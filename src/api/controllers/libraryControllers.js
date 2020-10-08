@@ -58,8 +58,6 @@ const createNewBook = (book, repository) => {
                 message: 'This ISBN is already in use by another book.',
               });
             } else {
-            //   book.createdBy = createdBy;
-            //   book.storeId = storeId;
               repository()
                   .create(book)
                   .then((newBook) => {
@@ -97,8 +95,6 @@ const editBook = (id, book, repository) => {
                       message: 'This ISBN is already in use by another book.',
                     });
                   } else {
-                    //   book.lastUpdatedBy = updatedBy;
-                    //   book.updated = Date.now()
                     repository()
                         .update(id, book)
                         .then((editedBook) => {
@@ -226,7 +222,7 @@ const viewLibrary = (repository) => {
             if (!library) {
               return resolve({
                 status: 404,
-                message: 'There are no books registered',
+                message: 'No books were found with the parameters informed',
               });
             }
 
