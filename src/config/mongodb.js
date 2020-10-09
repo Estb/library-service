@@ -2,25 +2,26 @@ const mongoose = require('mongoose');
 
 let mongoDB = null;
 
-const connect = (callback) =>{
-  mongoDB = mongoose.connection;
-
-  mongoose.connect(process.env.MONGO_CONNECTION, {
+const connect =async (callback) =>{
+  await mongoose.connect(process.env.MONGO_CONNECTION, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
+  }, (err, ok)=>{
+    if (ok) {
+      mongoose.connection.useDb(process.env.DATABASE);
+      mongoDB = ok.connection;
+    }
+    return callback(null, mongoDB);
   });
-  mongoDB.useDb(process.env.DATABASE);
 
-  mongoDB.on('error', function callback() {
+  mongoose.connection.on('error', (err)=>{
     console.log('Error when connecting to db ');
   });
 
-  mongoDB.once('open', function callback() {
+  mongoose.connection.once('open', function callback() {
     console.log('Successfully connected to database ');
   });
-
-  return callback(null, mongoDB);
 };
 
 

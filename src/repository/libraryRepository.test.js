@@ -24,12 +24,6 @@ describe('Test Repository', () => {
     done();
   });
 
-  it('Should find by findByIdorISBN', async (done) => {
-    const book = await repository().findByIdorISBN(bookId, {});
-    expect(book[0]).toHaveProperty('_id');
-    done();
-  });
-
   it('Should find All Itens', async (done) => {
     const book = await repository().findAll();
     expect(book[0]).toHaveProperty('title');
@@ -39,6 +33,12 @@ describe('Test Repository', () => {
   it('Should Create a new book', async (done) => {
     const book = await repository().create(apiMock.createBook());
     expect(book).toMatchObject({title: apiMock.createBook().title});
+    done();
+  });
+
+  it('Should find by findByIdorISBN', async (done) => {
+    const book = await repository().findByIdorISBN(bookId, {active: 'true'});
+    expect(book[0]).toHaveProperty('_id');
     done();
   });
 

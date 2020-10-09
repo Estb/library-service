@@ -74,7 +74,7 @@ describe('Test Library Router', () => {
   it('Should search book by params', async (done) => {
     const response = await supertest(app)
         .get('/books')
-        .query({name: 'test'})
+        .query({title: 'test'})
         .set('Authorization', 'bearer ' + token);
     expect(response.status).toBe(200);
     expect(response.type).toBe('application/json');
@@ -83,7 +83,7 @@ describe('Test Library Router', () => {
 
   it('Should User view book by ID', async (done) => {
     const response = await supertest(app)
-        .get('/library/book/' + `${bookId}`)
+        .get('/library/books/' + `${bookId}`)
         .set('Authorization', 'bearer ' + token);
     expect(response.status).toBe(200);
     expect(response.type).toBe('application/json');
@@ -112,7 +112,7 @@ describe('Test Library Router', () => {
 
   it('Should user rent a book', async (done) => {
     const response = await supertest(app)
-        .post('/library/book/' + `${bookId}` + '/rent')
+        .post('/library/books/' + `${bookId}` + '/rent')
         .set('Authorization', 'bearer ' + token);
     expect(response.status).toBe(200);
     expect(response.type).toBe('application/json');
@@ -121,7 +121,7 @@ describe('Test Library Router', () => {
 
   it('Should user return a book rent', async (done) => {
     const response = await supertest(app)
-        .post('/library/book/' + `${bookId}` + '/return')
+        .post('/library/books/' + `${bookId}` + '/return')
         .set('Authorization', 'bearer ' + token);
     expect(response.status).toBe(200);
     expect(response.type).toBe('application/json');
